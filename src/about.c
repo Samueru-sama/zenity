@@ -294,7 +294,7 @@ zenity_about (ZenityData *data) {
 
 	g_free (license_trans);
 
-  gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity.png");
+  imgpath = ZENITY_IMAGE_FULLPATH ("zenity.png");
 	zenity_util_set_window_icon (dialog, NULL, imgpath);
 	g_free(imgpath);
 
