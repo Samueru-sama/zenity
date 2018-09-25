@@ -49,6 +49,21 @@
 #define ZENITY_ERROR_DEFAULT -1
 #define ZENITY_EXTRA_DEFAULT 127
 
+
+gchar *zenity_util_get_file_full_path(const gchar* filename)
+{
+	gchar* data_dir = g_getenv("ZENITY_DATA_DIR");
+	if(!data_dir) return g_strdup(filename);
+	gsize tot_len = strlen(data_dir) + strlen(filename) + 2;
+	gchar* result = (gchar*)g_malloc(tot_len);
+	if(!result) return g_strdup(filename);
+	result[0] = 0;
+	g_strlcpy(result, data_dir, tot_len);
+	g_strlcat(result, "/", tot_len);
+	g_strlcat(result, filename, tot_len);
+	return result;
+}
+
 GtkBuilder *
 zenity_util_load_ui_file (const gchar *root_widget, ...) {
 	va_list args;
