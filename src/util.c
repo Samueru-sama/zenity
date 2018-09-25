@@ -101,10 +101,13 @@ zenity_util_load_ui_file (const gchar *root_widget, ...) {
 			builder, ZENITY_UI_FILE_RELATIVEPATH, objects, NULL);
 	}
 
-	if (result == 0)
+	if (result == 0) {
+		gchar* uipath = ZENITY_UI_FILE_FULLPATH;
 		result = gtk_builder_add_objects_from_file (
-			builder, ZENITY_UI_FILE_FULLPATH, objects, &error);
-
+			builder, uipath, objects, &error);
+		g_free(uipath);
+	}
+	
 	g_strfreev (objects);
 
 	if (result == 0) {
