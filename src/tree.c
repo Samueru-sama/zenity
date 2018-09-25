@@ -444,8 +444,10 @@ zenity_tree (ZenityData *data, ZenityTreeData *tree_data) {
 		gtk_label_set_markup (
 			GTK_LABEL (text), g_strcompress (tree_data->dialog_text));
 
+	gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity-list.png");
 	zenity_util_set_window_icon (
-		dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-list.png"));
+		dialog, data->window_icon, imgpath);
+	g_free(imgpath);
 
 	if (data->width > -1 || data->height > -1)
 		gtk_window_set_default_size (

@@ -77,8 +77,9 @@ zenity_entry (ZenityData *data, ZenityEntryData *entry_data) {
 	if (data->dialog_title)
 		gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
 
-	zenity_util_set_window_icon (
-		dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-entry.png"));
+  gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity-entry.png");
+	zenity_util_set_window_icon (dialog, data->window_icon, imgpath);
+	g_free(imgpath);
 
 	if (data->width > -1 || data->height > -1)
 		gtk_window_set_default_size (

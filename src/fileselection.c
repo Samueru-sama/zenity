@@ -83,8 +83,10 @@ zenity_fileselection (ZenityData *data, ZenityFileData *file_data) {
 	if (data->modal)
 		gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
+  gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity-file.png");
 	zenity_util_set_window_icon (
-		dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-file.png"));
+		dialog, data->window_icon, imgpath);
+	g_free(imgpath);
 
 	if (data->extra_label) {
 		gint i = 0;

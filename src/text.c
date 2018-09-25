@@ -276,8 +276,10 @@ zenity_text (ZenityData *data, ZenityTextData *text_data) {
 	if (data->dialog_title)
 		gtk_window_set_title (GTK_WINDOW (dialog), data->dialog_title);
 
+  gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity-text.png");
 	zenity_util_set_window_icon (
-		dialog, data->window_icon, ZENITY_IMAGE_FULLPATH ("zenity-text.png"));
+		dialog, data->window_icon, imgpath);
+	g_free(imgpath);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
