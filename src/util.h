@@ -6,11 +6,14 @@
 
 G_BEGIN_DECLS
 
-#define ZENITY_UI_FILE_FULLPATH ZENITY_DATADIR "/zenity.ui"
+//#define ZENITY_UI_FILE_FULLPATH ZENITY_DATADIR "/zenity.ui"
+#define ZENITY_UI_FILE_FULLPATH zenity_util_get_file_full_path("zenity.ui")
 #define ZENITY_UI_FILE_RELATIVEPATH "./zenity.ui"
 
-#define ZENITY_IMAGE_FULLPATH(filename) (ZENITY_DATADIR "/" filename)
+//#define ZENITY_IMAGE_FULLPATH(filename) (ZENITY_DATADIR "/" filename)
+#define ZENITY_IMAGE_FULLPATH(filename) zenity_util_get_file_full_path(const gchar* filename)l(filename)
 
+gchar *zenity_util_get_file_full_path(const gchar* filename)l
 GtkBuilder *zenity_util_load_ui_file (
 	const gchar *widget_root, ...) G_GNUC_NULL_TERMINATED;
 gchar *zenity_util_strip_newline (gchar *string);
