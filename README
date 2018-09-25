@@ -1,3 +1,6 @@
+This is a fork of the original Zenity repository. 
+The code is modified to make the application portable, not relying on hard-coded absolute paths.
+
 Zen Understanding -
 ===================
 This is zenity - a rewrite of gdialog, the GNOME port of dialog
