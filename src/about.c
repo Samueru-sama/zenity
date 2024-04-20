@@ -74,8 +74,9 @@ zenity_about (ZenityData *data) {
 	char *license_trans;
 
 	translators = _ ("translator-credits");
-	logo =
-		gdk_pixbuf_new_from_file (ZENITY_IMAGE_FULLPATH ("zenity.png"), NULL);
+  gchar* imgpath = ZENITY_IMAGE_FULLPATH ("zenity.png");
+	logo = gdk_pixbuf_new_from_file (imgpath, NULL);
+	g_free(imgpath);
 
 	license_trans = g_strconcat (
 		_ (license[0]), "\n", _ (license[1]), "\n", _ (license[2]), "\n", NULL);
@@ -109,8 +110,9 @@ zenity_about (ZenityData *data) {
 
 	g_free (license_trans);
 
-	zenity_util_set_window_icon (
-		dialog, NULL, ZENITY_IMAGE_FULLPATH ("zenity.png"));
+  imgpath = ZENITY_IMAGE_FULLPATH ("zenity.png");
+	zenity_util_set_window_icon (dialog, NULL, imgpath);
+	g_free(imgpath);
 
 	g_signal_connect (G_OBJECT (dialog),
 		"response",

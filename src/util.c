@@ -49,12 +49,20 @@
 #define ZENITY_ERROR_DEFAULT -1
 #define ZENITY_EXTRA_DEFAULT 127
 
-/* This exit code number is arbitrary, but since for the entire 3.x release
- * cycle, zenity would essentially exit(ZENITY_TIMEOUT), which happened to be
- * defined as 5 based on where it was placed in the enum sequence. So
- * hardcoding it as 5 now in case any pre-existing scripts relied upon that
- * being the exit status for timeouts.
- */
+gchar *zenity_util_get_file_full_path(const gchar* filename)
+{
+	gchar* data_dir = g_getenv("ZENITY_DATA_DIR");
+	if(!data_dir) return g_strdup(filename);
+	gsize tot_len = strlen(data_dir) + strlen(filename) + 2;
+	gchar* result = (gchar*)g_malloc(tot_len);
+	if(!result) return g_strdup(filename);
+	result[0] = 0;
+	g_strlcpy(result, data_dir, tot_len);
+	g_strlcat(result, "/", tot_len);
+	g_strlcat(result, filename, tot_len);
+	return result;
+}
+
 #define ZENITY_TIMEOUT_DEFAULT 5
 
 GtkBuilder *
@@ -94,9 +102,12 @@ zenity_util_load_ui_file (const gchar *root_widget, ...) {
 			builder, ZENITY_UI_FILE_RELATIVEPATH, objects, NULL);
 	}
 
-	if (result == 0)
+	if (result == 0) {
+		gchar* uipath = ZENITY_UI_FILE_FULLPATH;
 		result = gtk_builder_add_objects_from_file (
-			builder, ZENITY_UI_FILE_FULLPATH, objects, &error);
+			builder, uipath, objects, &error);
+		g_free(uipath);
+	}
 
 	g_strfreev (objects);
 
