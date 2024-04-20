@@ -1,3 +1,9 @@
+# Zenity fork (GTK3)
+
+This fork is a modified version of Zenity 3.44 that removes the hardcoded paths that zenity has, it is used to make this [AppImage](https://github.com/Samueru-sama/Zenity-GTK3-AppImage)
+
+Credit and big thanks goes to @aferrero2707 for the patches (I tried to merge them here but couldn't lol). 
+
 # Zenity
 
 This is Zenity - a rewrite of gdialog, the GNOME port of dialog
